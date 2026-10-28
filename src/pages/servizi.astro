@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Picture from '../components/Picture.astro';
+import Icon from '../components/Icon.astro';
+import Cta from '../components/Cta.astro';
+import { site, abs } from '../data/site';
+import { servizi } from '../data/servizi';
+import { heroImgs } from '../data/immagini';
+
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Servizi', href: '/servizi/' }];
+const hero = heroImgs[1];
+const ld = servizi.map((s) => ({
+  '@type': 'Service',
+  '@id': abs(`/servizi/#${s.id}`),
+  name: s.nome,
+  serviceType: s.nome,
+  description: [s.breve, ...s.paragrafi].join(' '),
+  provider: { '@id': abs('/#organizzazione') },
+  areaServed: site.areeServite.filter((a) => a.tipo !== 'AdministrativeArea').map((a) => ({ '@type': a.tipo, name: a.nome })),
+  url: abs(`/servizi/#${s.id}`),
+}));
+---
+<Layout title={`Servizi edili e ponteggi a Ferrara | ${site.nome}`} description="Impresa edile, noleggio e allestimento ponteggi a Ferrara: ristrutturazioni, coperture, impianti e demolizioni. Richiedi un preventivo gratuito." ogType="article" transparent crumbs={crumbs} ld={ld}>
+<PageHero img={hero} crumbs={crumbs} eyebrow="Servizi"> <h1 class="h1-page">I nostri servizi edili e di ponteggi</h1> <p class="lead">Dall’impresa edile al noleggio e all’allestimento ponteggi: soluzioni complete per il tuo cantiere a Ferrara.</p> </PageHero>
+<nav class="bg-sand" aria-label="Indice dei servizi"> <div class="container" style="padding-block: 1.25rem"> <ul class="filters" style="margin:0"> {servizi.map((s) => <li><a href={`#${s.id}`}>{s.nome}</a></li>)} </ul> </div> </nav>
+{servizi.map((s, i) => {
+  const rev = i % 2 === 1;
+  return (
+<section id={s.id} class:list={['section', { 'bg-sand': rev }]}> <div class:list={['container split', { 'split-rev': rev }]}> <div class="reveal" style={rev ? 'order: 2' : undefined}> <div class="media" style="aspect-ratio: 3/2; overflow:hidden"> <Picture img={s.foto} sizes="(min-width: 1024px) 45vw, 92vw" /> </div> </div> <div class="reveal"> <Icon name={s.icona} class="service-icon" /> <p class="eyebrow mt-3 mb-2">Servizio {String(i + 1).padStart(2, '0')}</p> <h2 class="h2">{s.nome}</h2> <div class="prose mt-3">{s.paragrafi.map((p) => <p>{p}</p>)}</div> <ul class="checklist mt-4">{s.punti.map((p) => <li>{p}</li>)}</ul> <div class="btn-row mt-4"> <a href="/contatti/#richiesta" class="btn btn-primary">Richiedi un preventivo</a> </div> </div> </div> </section>
+  );
+})}
+<Cta />
+</Layout>

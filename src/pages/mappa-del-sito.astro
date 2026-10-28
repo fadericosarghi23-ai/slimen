@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+import { site } from '../data/site';
+import { nav } from '../data/nav';
+import { servizi } from '../data/servizi';
+
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Mappa del sito', href: '/mappa-del-sito/' }];
+---
+<Layout title={`Mappa del sito | ${site.nome}`} description={`Tutte le pagine del sito di ${site.nome}: chi siamo, servizi, galleria e contatti.`} crumbs={crumbs}>
+<PageHead crumbs={crumbs} title="Mappa del sito" />
+<section class="section"> <div class="container grid-2 prose"> <div> <h2>Pagine</h2> <ul> <li><a href="/">Home</a></li> {nav.map((v) => <li><a href={v.href}>{v.label}</a></li>)} <li><a href="/privacy-policy/">Privacy policy</a></li> <li><a href="/cookie-policy/">Cookie policy</a></li> </ul> </div> <div> <h2>Servizi</h2> <ul>{servizi.map((s) => <li><a href={`/servizi/#${s.id}`}>{s.nome}</a></li>)}</ul> </div> </div> </section>
+</Layout>

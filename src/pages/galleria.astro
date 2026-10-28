@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+import Picture from '../components/Picture.astro';
+import Lightbox from '../components/Lightbox.astro';
+import Cta from '../components/Cta.astro';
+import { site } from '../data/site';
+import { galleria } from '../data/immagini';
+import { galleryClass, fullSrc } from '../lib/media';
+
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Galleria', href: '/galleria/' }];
+---
+<Layout title={`Galleria lavori | ${site.nome}`} description="Galleria dei lavori di Slimen Costruzioni a Ferrara: edilizia, ristrutturazioni e noleggio ponteggi." pageType="CollectionPage" crumbs={crumbs}>
+<PageHead crumbs={crumbs} eyebrow="Galleria" title="I nostri lavori"> <p class="lead mt-3 narrow">Alcune immagini dei nostri cantieri e interventi a Ferrara e provincia.</p> </PageHead>
+<section class="section"> <div class="container"> <div class="gallery" data-gallery> {galleria.map((img) => <figure class:list={[galleryClass(img)]}> <button type="button" data-full={fullSrc(img)} data-alt={img.alt}> <Picture img={img} sizes="(min-width: 640px) 48vw, 92vw" /> </button> </figure>)} </div> </div> </section>
+<Lightbox />
+<Cta />
+</Layout>

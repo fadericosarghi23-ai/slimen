@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Picture from '../components/Picture.astro';
+import Cta from '../components/Cta.astro';
+import { site } from '../data/site';
+import { approccio, competenzeStudio } from '../data/contenuti';
+import { heroImgs } from '../data/immagini';
+
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Chi Siamo', href: '/studio/' }];
+const hero = heroImgs[2];
+const foto = [heroImgs[0], heroImgs[1]];
+---
+<Layout title={`Chi siamo | ${site.nome}, impresa edile a Ferrara`} description="Slimen Costruzioni S.r.l., impresa edile e noleggio ponteggi a Ferrara: professionalità, affidabilità e soluzioni costruttive su misura." pageType="AboutPage" ogType="article" transparent crumbs={crumbs}>
+<PageHero img={hero} crumbs={crumbs} eyebrow="Chi siamo"> <h1 class="h1-page">L’eccellenza nel <em style="color: var(--accent-on-dark)">settore edile</em></h1> <p class="lead">Impresa edile e noleggio ponteggi a Ferrara, al servizio di privati e imprese.</p> </PageHero>
+<section class="section"> <div class="container split"> <div class="reveal"> <p class="eyebrow mb-2">Su di noi</p> <h2 class="h2">Slimen Costruzioni S.r.l.</h2> </div> <div class="prose lead reveal"> <p>Benvenuti in Slimen Costruzioni S.r.l., il partner ideale per le tue esigenze costruttive a Ferrara. Con sede in {site.indirizzo.via}, incarniamo l’eccellenza nel settore edile: la nostra missione è trasformare le tue visioni in realtà attraverso soluzioni costruttive all’avanguardia.</p> <p>Da anni abbiamo costruito un solido rapporto di fiducia con i nostri clienti, offrendo servizi edili innovativi e affidabili. Il nostro team di professionisti altamente qualificati è la spina dorsale delle nostre operazioni.</p> <p>Siamo specializzati in progetti di costruzione di varie dimensioni, dalla progettazione all’implementazione, con un focus particolare sulla sostenibilità e sul rispetto dell’ambiente.</p> </div> </div> </section>
+<section class="section bg-sand"> <div class="container"> <div class="section-head reveal"> <div> <p class="eyebrow">Approccio</p> <h2 class="h2">Cosa ci distingue</h2> </div> </div> <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 2.5rem"> {approccio.map((a, i) => <div class="reveal border-top" style={`padding-top:1.5rem; transition-delay:${i * 80}ms`}> <p class="eyebrow mb-2">{String(i + 1).padStart(2, '0')}</p> <h3 class="h3 mb-2">{a.titolo}</h3> <p>{a.testo}</p> </div>)} </div> <div class="grid-2 mt-4"> {foto.map((f) => <div class="ratio-32 reveal"><Picture img={f} sizes="(min-width: 1024px) 45vw, 92vw" /></div>)} </div> </div> </section>
+<section class="section bg-sand"> <div class="container grid-2"> <div class="reveal"> <p class="eyebrow mb-2">La sede</p> <h2 class="h2">{site.indirizzo.via}, {site.indirizzo.citta}</h2> <p class="lead mt-3">La nostra sede è in {site.indirizzo.via} a {site.indirizzo.citta}. Contattaci per fissare un sopralluogo o richiedere un preventivo gratuito.</p> <div class="btn-row mt-4"> <a href="/contatti/" class="btn btn-primary">Contatti</a> <a href={site.mapsUrl} target="_blank" rel="noopener" class="btn btn-outline">Indicazioni stradali</a> </div> </div> <div class="reveal"> <ul class="checklist lead"> {competenzeStudio.map((c) => <li>{c}</li>)} </ul> </div> </div> </section>
+<Cta />
+</Layout>

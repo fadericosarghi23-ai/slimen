@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<title>Slimen Costruzioni - Identita e interventi</title>
+<style>
+  /* Font del sito: Inter Variable (sans) + Newsreader Variable (serif). */
+  @font-face { font-family:'Inter Variable'; font-weight:100 900; font-style:normal; font-display:swap; src:url('../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2') format('woff2'); }
+  @font-face { font-family:'Inter Variable'; font-weight:100 900; font-style:italic; font-display:swap; src:url('../node_modules/@fontsource-variable/inter/files/inter-latin-wght-italic.woff2') format('woff2'); }
+  @font-face { font-family:'Newsreader Variable'; font-weight:200 800; font-style:normal; font-display:swap; src:url('../node_modules/@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2') format('woff2'); }
+  @font-face { font-family:'Newsreader Variable'; font-weight:200 800; font-style:italic; font-display:swap; src:url('../node_modules/@fontsource-variable/newsreader/files/newsreader-latin-wght-italic.woff2') format('woff2'); }
+
+  :root{
+    --accent:#d30105; --accent-dark:#a80104; --accent-soft:#fbe3e3; --accent-on-dark:#ef8a8c;
+    --ink:#1a1a1a; --text:#333333; --grey:#6b6b6b; --sand:#f5f4f2; --grey-light:#e9e8e6;
+    --line:#1a1a1a1a; --ok:#1f7a46;
+    --sans:'Inter Variable', Inter, system-ui, sans-serif;
+    --serif:'Newsreader Variable', Newsreader, Georgia, serif;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background:#fff; }
+  body { font-family:var(--sans); font-size:9.6pt; line-height:1.6; color:var(--text); -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+  .pagina { width:210mm; height:297mm; padding:16mm 16mm 13mm; position:relative; overflow:hidden; page-break-after:always; break-after:page; }
+  .pagina:last-child { page-break-after:auto; break-after:auto; }
+
+  .piede { position:absolute; left:16mm; right:16mm; bottom:9mm; display:flex; justify-content:space-between; align-items:center; font-size:7pt; letter-spacing:.16em; text-transform:uppercase; color:var(--grey); border-top:1px solid var(--line); padding-top:2.6mm; }
+
+  .eyebrow { font-weight:600; font-size:7.4pt; letter-spacing:.22em; text-transform:uppercase; color:var(--accent); }
+  h1 { font-family:var(--serif); font-weight:400; font-size:37pt; line-height:1.02; letter-spacing:-.02em; color:var(--ink); margin-top:4mm; }
+  h1 em { color:var(--accent); font-style:italic; }
+  h2 { font-family:var(--serif); font-weight:400; font-size:23pt; line-height:1.08; letter-spacing:-.01em; color:var(--ink); margin:1.5mm 0 4mm; }
+  h2 em { color:var(--accent); font-style:italic; }
+  h3 { font-weight:600; font-size:9pt; letter-spacing:.02em; color:var(--ink); margin-bottom:1.2mm; }
+  .sub { font-weight:600; font-size:7.4pt; letter-spacing:.18em; text-transform:uppercase; color:var(--grey); }
+  p + p { margin-top:2mm; }
+  strong { color:var(--ink); font-weight:600; }
+  .lead { font-size:11pt; line-height:1.5; color:var(--text); max-width:150mm; }
+  .intro { font-size:10.4pt; line-height:1.55; max-width:155mm; margin-top:4mm; }
+  .mono { font-family:'Consolas', ui-monospace, monospace; }
+  .sep { height:1px; background:var(--line); margin:6mm 0; }
+  .muted { color:var(--grey); }
+
+  /* Copertina */
+  .cover-top { display:flex; justify-content:space-between; align-items:flex-start; }
+  .cover-top img { width:48mm; height:auto; }
+  .cover-meta { text-align:right; font-size:7.4pt; letter-spacing:.14em; text-transform:uppercase; color:var(--grey); line-height:1.9; }
+  .shot { width:100%; display:block; border:1px solid var(--line); border-radius:2mm; overflow:hidden; }
+  .shot img { width:100%; display:block; }
+  .didas { font-size:7.6pt; color:var(--grey); margin-top:1.8mm; max-width:150mm; }
+  .due { display:grid; grid-template-columns:1fr 1fr; gap:0 9mm; }
+
+  /* Palette */
+  .grandi { display:grid; grid-template-columns:1fr 1fr; gap:4mm; margin-bottom:4mm; }
+  .big { border:1px solid var(--line); border-radius:2mm; overflow:hidden; }
+  .big .c { height:20mm; display:flex; align-items:flex-end; padding:3mm; color:#fff; font-weight:600; font-size:7.6pt; letter-spacing:.06em; }
+  .big .t { padding:2.4mm 3mm 2.8mm; }
+  .big .n { font-weight:600; color:var(--ink); font-size:9pt; }
+  .big .h { font-family:'Consolas', monospace; font-size:8.4pt; color:var(--ink); }
+  .big .u { font-size:7.6pt; color:var(--grey); line-height:1.35; margin-top:.8mm; }
+  .swatches { display:grid; grid-template-columns:repeat(3,1fr); gap:3.5mm; }
+  .sw { border:1px solid var(--line); border-radius:2mm; overflow:hidden; }
+  .sw .c { height:10mm; }
+  .sw .t { padding:2mm 2.6mm 2.4mm; }
+  .sw .n { font-weight:600; color:var(--ink); font-size:8.4pt; }
+  .sw .h { font-family:'Consolas', monospace; font-size:7.8pt; color:var(--ink); }
+  .sw .u { font-size:7.2pt; color:var(--grey); line-height:1.3; margin-top:.4mm; }
+
+  table { width:100%; border-collapse:collapse; font-size:8.4pt; }
+  th { text-align:left; font-weight:600; font-size:7pt; letter-spacing:.14em; text-transform:uppercase; color:var(--grey); border-bottom:1px solid var(--ink); padding:1.8mm 2mm; }
+  td { border-bottom:1px solid var(--line); padding:1.9mm 2mm; vertical-align:middle; }
+  td.num { font-family:'Consolas', monospace; white-space:nowrap; }
+  .chip { display:inline-block; width:8mm; height:5mm; border-radius:1mm; vertical-align:middle; margin-right:2mm; font-size:7.6pt; line-height:5mm; text-align:center; font-weight:700; border:1px solid #0000000f; }
+  .ok { color:var(--ok); font-weight:700; }
+  .ko { color:var(--accent); font-weight:700; }
+
+  /* Tipografia + componenti */
+  .tipo { display:grid; grid-template-columns:1fr 1fr; gap:4mm; }
+  .card { border:1px solid var(--line); border-radius:2mm; padding:4mm; }
+  .card .es-serif { font-family:var(--serif); font-weight:400; font-size:21pt; line-height:1.05; color:var(--ink); margin:1.5mm 0 1mm; }
+  .card .es-serif em { color:var(--accent); font-style:italic; }
+  .card .es-sans { font-size:11pt; color:var(--ink); margin:2mm 0 1mm; }
+  .card .u { font-size:7.6pt; color:var(--grey); line-height:1.35; }
+  .strip { display:grid; grid-template-columns:repeat(4,1fr); gap:3.5mm; align-items:stretch; }
+  .mini { border:1px solid var(--line); border-radius:2mm; padding:3.2mm; display:flex; flex-direction:column; justify-content:space-between; }
+  .mini .lbl { font-size:6.8pt; letter-spacing:.14em; text-transform:uppercase; color:var(--grey); margin-bottom:2.4mm; }
+  .btn-demo { background:var(--accent); color:#fff; font-weight:600; font-size:7.2pt; letter-spacing:.14em; text-transform:uppercase; text-align:center; padding:2.6mm 2mm; border-radius:0; }
+  .check li { position:relative; padding-left:5mm; font-size:8.4pt; color:var(--ink); line-height:1.5; }
+  .check li::before { content:""; position:absolute; left:0; top:1.6mm; width:2.6mm; height:1.4mm; border-left:1.4px solid var(--accent); border-bottom:1.4px solid var(--accent); transform:rotate(-45deg); }
+
+  /* Voci (interventi / da completare) */
+  .voce { display:grid; grid-template-columns:7mm 1fr; gap:2.6mm; padding:2.4mm 0; border-bottom:1px solid var(--line); }
+  .voce:last-child { border-bottom:0; }
+  .b { width:6.4mm; height:6.4mm; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:8pt; margin-top:.4mm; }
+  .b.fix { background:var(--ink); }
+  .b.apr { background:var(--accent); }
+  .voce p { font-size:8.6pt; line-height:1.45; }
+
+  .box { background:var(--sand); border-radius:2mm; padding:4mm 5mm; }
+  .box.scuro { background:var(--ink); color:#ffffffcc; }
+  .box.scuro h3 { color:#fff; }
+  .box.scuro .eyebrow { color:var(--accent-on-dark); }
+  .numeri { display:grid; grid-template-columns:repeat(4,1fr); gap:3.5mm; margin-top:3.5mm; }
+  .numeri div { border-top:2px solid var(--accent); padding-top:2mm; }
+  .numeri b { display:block; font-family:var(--serif); font-weight:400; font-size:21pt; color:#fff; line-height:1; }
+  .numeri span { font-size:7pt; color:#ffffff9c; line-height:1.3; display:block; margin-top:1mm; }
+
+  ul.plain { list-style:none; }
+  ul.plain li { padding-left:4.5mm; position:relative; font-size:8.8pt; line-height:1.5; }
+  ul.plain li::before { content:""; position:absolute; left:0; top:2.2mm; width:2.4mm; height:1px; background:var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- ======================= PAGINA 1 - COPERTINA ======================= -->
+<section class="pagina">
+  <div class="cover-top">
+    <img src="../public/img/slimen/logo-slimen.png" alt="Logo Slimen Costruzioni" />
+    <div class="cover-meta">Nuovo sito web<br/>Documento di consegna<br/>Ottobre 2026</div>
+  </div>
+
+  <p class="eyebrow" style="margin-top:14mm">Slimen Costruzioni S.r.l. · Ferrara</p>
+  <h1>Identita, contenuti<br/>e <em>interventi</em></h1>
+  <p class="intro">
+    Il sito attuale (<strong>slimencostruzionisrl.com</strong>) e una pagina WordPress con il tema di serie:
+    nome, servizi, recapiti, sede e foto ci sono, ma dispersi in un modello grafico generico.
+    Il nuovo sito parte da quei dati reali, li riordina e li inserisce in un sito completo, con una
+    <strong>identita visiva ricavata dal logo dell'azienda</strong>: il rosso del marchio e il nero, una
+    coppia tipografica serif piu sans, e un insieme di componenti ripetuti in ogni pagina.
+  </p>
+
+  <div class="shot" style="margin-top:7mm"><img src="img/home.png" alt="Apertura del nuovo sito Slimen Costruzioni" /></div>
+  <p class="didas">L'apertura del nuovo sito: titolo con accento in corsivo rosso, foto reale di cantiere a tutta pagina,
+    occhiello e bottoni del marchio. Le foto sono quelle del sito attuale (vanno sostituite con foto dei lavori in alta risoluzione).</p>
+
+  <div class="sep"></div>
+
+  <div class="due">
+    <div>
+      <h3>Cosa contiene il documento</h3>
+      <p class="muted">1 · Questa introduzione<br/>2 · L'identita visiva: palette, contrasti e tipografia<br/>
+        3 · Il sito: sezioni, contenuti e scelte fatte durante la costruzione<br/>4 · Qualita tecnica e cosa resta da completare</p>
+    </div>
+    <div>
+      <h3>Come e stato costruito</h3>
+      <p class="muted">Tutti i testi sono presi dal sito attuale, senza inventarne di nuovi. Dove un dato non era
+        recuperabile (per esempio la partita IVA) il sito lo segna come "da fornire" invece di riempirlo a caso.
+        Palette, tipografia e componenti seguono il logo, non un tema preconfezionato.</p>
+    </div>
+  </div>
+
+  <div class="piede"><span>Slimen Costruzioni S.r.l. · Via Modena 120, Ferrara</span><span>1 / 4</span></div>
+</section>
+
+<!-- ======================= PAGINA 2 - IDENTITA ======================= -->
+<section class="pagina">
+  <p class="eyebrow">L'identita visiva</p>
+  <h2>Il marchio, non solo <em>i colori</em></h2>
+  <p style="max-width:160mm; margin-bottom:5mm">L'identita poggia su tre cose coordinate: la <strong>palette</strong> presa dal logo,
+    una <strong>coppia tipografica</strong> (serif per i titoli, sans per il testo) e un set di <strong>componenti</strong>
+    ripetuti in tutte le pagine. Il tema WordPress di partenza usava invece colori di serie (blu, grigi, un verde dal
+    plugin dei cookie) scollegati dal marchio: sono stati scartati.</p>
+
+  <div class="grandi">
+    <div class="big"><div class="c" style="background:#d30105">Rosso di marca · dal logo</div>
+      <div class="t"><span class="n">Accent</span> · <span class="h">#D30105</span>
+        <div class="u">Occhielli, link, bottoni, icone e accenti dei titoli. E il rosso del logo.</div></div></div>
+    <div class="big"><div class="c" style="background:#1a1a1a">Nero · dal logo</div>
+      <div class="t"><span class="n">Ink</span> · <span class="h">#1A1A1A</span>
+        <div class="u">Titoli, header, sezioni scure e footer.</div></div></div>
+  </div>
+
+  <div class="swatches">
+    <div class="sw"><div class="c" style="background:#a80104"></div><div class="t"><span class="n">Rosso scuro</span> <span class="h">#A80104</span><div class="u">Stato hover dei bottoni.</div></div></div>
+    <div class="sw"><div class="c" style="background:#ef8a8c"></div><div class="t"><span class="n">Rosso schiarito</span> <span class="h">#EF8A8C</span><div class="u">Testi e occhielli sui fondi scuri.</div></div></div>
+    <div class="sw"><div class="c" style="background:#fbe3e3"></div><div class="t"><span class="n">Rosso tenue</span> <span class="h">#FBE3E3</span><div class="u">Velature e fondi leggeri.</div></div></div>
+    <div class="sw"><div class="c" style="background:#f5f4f2"></div><div class="t"><span class="n">Sabbia</span> <span class="h">#F5F4F2</span><div class="u">Fondo delle sezioni alternate.</div></div></div>
+    <div class="sw"><div class="c" style="background:#333333"></div><div class="t"><span class="n">Testo</span> <span class="h">#333333</span><div class="u">Paragrafi.</div></div></div>
+    <div class="sw"><div class="c" style="background:#6b6b6b"></div><div class="t"><span class="n">Grigio</span> <span class="h">#6B6B6B</span><div class="u">Testi secondari, didascalie.</div></div></div>
+  </div>
+
+  <p class="eyebrow" style="margin-top:6mm">Contrasti misurati (WCAG 2.1, soglia AA 4.5:1)</p>
+  <table style="margin-top:2mm">
+    <tr><th>Combinazione</th><th>Uso</th><th>Rapporto</th><th>Esito</th></tr>
+    <tr><td><span class="chip" style="background:#fff;color:#d30105">Aa</span>Rosso #D30105 su bianco</td><td>link e testo in evidenza</td><td class="num">5.56 : 1</td><td class="ok">AA</td></tr>
+    <tr><td><span class="chip" style="background:#d30105;color:#fff">Aa</span>Bianco su bottone rosso</td><td>"Richiedi un preventivo"</td><td class="num">5.56 : 1</td><td class="ok">AA</td></tr>
+    <tr><td><span class="chip" style="background:#1a1a1a;color:#ef8a8c">Aa</span>Rosso schiarito su nero</td><td>occhielli e testi su fondo scuro</td><td class="num">7.20 : 1</td><td class="ok">AAA</td></tr>
+    <tr><td><span class="chip" style="background:#1a1a1a;color:#d30105">Aa</span>Rosso di marca su nero</td><td>scartato: sotto soglia</td><td class="num">3.13 : 1</td><td class="ko">No</td></tr>
+    <tr><td><span class="chip" style="background:#fff;color:#333">Aa</span>Testo #333333 su bianco</td><td>paragrafi</td><td class="num">12.63 : 1</td><td class="ok">AAA</td></tr>
+    <tr><td><span class="chip" style="background:#fff;color:#6b6b6b">Aa</span>Grigio #6B6B6B su bianco</td><td>didascalie</td><td class="num">5.33 : 1</td><td class="ok">AA</td></tr>
+  </table>
+
+  <p class="eyebrow" style="margin-top:6mm">Tipografia</p>
+  <div class="tipo" style="margin-top:2mm">
+    <div class="card"><span class="sub">Titoli</span>
+      <div class="es-serif">esigenze <em>costruttive</em></div>
+      <div class="u">Newsreader (serif), peso 400. Le parole in evidenza vanno in corsivo rosso, come nel titolo della home.</div></div>
+    <div class="card"><span class="sub">Testo e etichette</span>
+      <div class="es-sans">Impresa edile e noleggio ponteggi a Ferrara.</div>
+      <div class="u" style="margin-bottom:2mm">Inter (sans), leggibile a ogni misura, anche da telefono.</div>
+      <span class="sub" style="color:var(--accent)">Servizio 01 &nbsp; Richiedi un preventivo</span></div>
+  </div>
+
+  <div class="piede"><span>Identita visiva · palette, contrasti, tipografia</span><span>2 / 4</span></div>
+</section>
+
+<!-- ======================= PAGINA 3 - IL SITO ======================= -->
+<section class="pagina">
+  <p class="eyebrow">Il sito</p>
+  <h2>Le sezioni, i contenuti e <em>le scelte</em></h2>
+  <p style="max-width:160mm; margin-bottom:4mm">Il sito e stato ridotto alle sezioni che l'azienda ha davvero, riempite con i testi
+    del sito attuale. Niente pagine finte: le aree che non esistevano (team, portfolio progetti, pagine "metodo") sono state tolte.</p>
+
+  <div class="due" style="gap:0 9mm">
+    <div>
+      <h3>Le pagine costruite</h3>
+      <ul class="plain" style="margin-top:1.5mm">
+        <li><strong>Home</strong>: carosello di apertura, presentazione, i tre servizi, testimonianze, mappa e invito al contatto.</li>
+        <li><strong>Chi siamo</strong>: presentazione dell'azienda, approccio e competenze, con la sede.</li>
+        <li><strong>Servizi</strong>: Impresa Edile, Noleggio Ponteggi e Allestimento Ponteggi, ognuno con i suoi sotto servizi.</li>
+        <li><strong>Galleria</strong>: griglia dei lavori con apertura a tutto schermo.</li>
+        <li><strong>Contatti</strong>: recapiti, mappa reale e modulo di richiesta preventivo.</li>
+        <li><strong>Pagine di servizio</strong>: privacy, cookie, mappa del sito e pagina 404.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="shot"><img src="img/servizi.png" alt="Pagina Servizi del nuovo sito" /></div>
+      <p class="didas">La pagina Servizi: occhiello rosso, titolo serif, elenco con spunta rossa e foto coerente col servizio.</p>
+    </div>
+  </div>
+
+  <div class="sep" style="margin:5mm 0"></div>
+
+  <h3>Scelte fatte durante la costruzione</h3>
+  <div class="voce"><span class="b fix">A</span><p><strong>Palette ricavata dal logo.</strong> Rosso #D30105 e nero. Sono stati scartati i colori del tema WordPress (blu, grigi, il verde del plugin dei cookie) perche scollegati dal marchio.</p></div>
+  <div class="voce"><span class="b fix">B</span><p><strong>Rosso leggibile anche sui fondi scuri.</strong> Il rosso di marca su nero e a 3.13:1 (sotto soglia): per i testi su fondo scuro si usa il rosso schiarito #EF8A8C a 7.20:1.</p></div>
+  <div class="voce"><span class="b fix">C</span><p><strong>Logo reale nell'header e nel footer.</strong> Nel footer scuro e posato su una targhetta bianca cosi resta leggibile. Foto dei servizi messe in coerenza (ponteggi sui servizi ponteggi).</p></div>
+  <div class="voce"><span class="b fix">D</span><p><strong>Codice ripulito.</strong> Nomi di file, nome del pacchetto e commenti di altri progetti sono stati tolti: nel codice non resta alcun dato di altri clienti (controllo automatico su 67 file).</p></div>
+
+  <div class="sep" style="margin:6mm 0 4mm"></div>
+  <h3>I componenti che si ripetono in tutte le pagine</h3>
+  <div class="strip" style="margin-top:2.5mm">
+    <div class="mini"><span class="lbl">Occhiello</span><span class="eyebrow">Servizio 01</span></div>
+    <div class="mini"><span class="lbl">Titolo</span><span style="font-family:var(--serif);font-size:14pt;color:var(--ink);line-height:1.1">Impresa <em style="color:var(--accent);font-style:italic">Edile</em></span></div>
+    <div class="mini"><span class="lbl">Bottone</span><span class="btn-demo">Richiedi un preventivo</span></div>
+    <div class="mini"><span class="lbl">Elenco</span><ul class="check"><li>Ristrutturazioni</li><li>Coperture</li></ul></div>
+  </div>
+
+  <div class="piede"><span>Il sito · sezioni, contenuti, scelte</span><span>3 / 4</span></div>
+</section>
+
+<!-- ======================= PAGINA 4 - QUALITA + DA COMPLETARE ======================= -->
+<section class="pagina">
+  <p class="eyebrow">Qualita tecnica</p>
+  <h2>Pronto per la pubblicazione</h2>
+
+  <div class="due">
+    <div>
+      <div class="voce"><span class="b fix">+</span><p><strong>Veloce</strong>: immagini servite in AVIF e WebP alla misura giusta, caricamento differito, font precaricati.</p></div>
+      <div class="voce"><span class="b fix">+</span><p><strong>Accessibile</strong>: contrasti AA e AAA, link "salta al contenuto", focus visibile da tastiera, testo alternativo sulle immagini.</p></div>
+      <div class="voce"><span class="b fix">+</span><p><strong>Trovabile</strong>: titolo e descrizione per ogni pagina, anteprima per social e WhatsApp, dati strutturati con indirizzo e telefono, sitemap e robots.</p></div>
+    </div>
+    <div>
+      <div class="voce"><span class="b fix">+</span><p><strong>Animazioni misurate</strong>: carosello in apertura, comparse morbide allo scorrimento, header che si compatta, galleria a tutto schermo. Si spengono per chi le ha disattivate nel sistema.</p></div>
+      <div class="voce"><span class="b fix">+</span><p><strong>Contenuti fedeli</strong>: i testi sono quelli del sito attuale; nessun dato e stato inventato.</p></div>
+      <div class="voce"><span class="b fix">+</span><p><strong>Deploy configurato</strong>: build statica pronta per Netlify, con Node 20 e installazione pulita.</p></div>
+    </div>
+  </div>
+
+  <div class="box scuro" style="margin-top:5mm">
+    <p class="eyebrow">Verifiche</p>
+    <h3 style="margin-top:1mm">Lo stato della build</h3>
+    <div class="numeri">
+      <div><b>10</b><span>pagine statiche, build completata senza errori</span></div>
+      <div><b>0</b><span>residui di altri clienti (controllo su 67 file)</span></div>
+      <div><b>0</b><span>link rotti verso vecchie sezioni</span></div>
+      <div><b>Node 20</b><span>configurazione Netlify inclusa</span></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:6mm">Da completare prima della pubblicazione</h3>
+  <div class="due">
+    <div>
+      <div class="voce"><span class="b apr">!</span><p><strong>Dati legali</strong>: partita IVA e PEC, obbligatorie per una societa. Vanno forniti: oggi le pagine li segnano come mancanti.</p></div>
+      <div class="voce"><span class="b apr">!</span><p><strong>Foto dei lavori</strong>: quelle a video sono le foto del sito attuale, a bassa risoluzione. Servono foto reali dei cantieri in alta risoluzione, soprattutto per la galleria.</p></div>
+      <div class="voce"><span class="b apr">!</span><p><strong>Logo vettoriale</strong>: oggi e un PNG. Serve la versione SVG per averlo nitido a ogni misura e nei dati per Google.</p></div>
+    </div>
+    <div>
+      <div class="voce"><span class="b apr">!</span><p><strong>Modulo contatti</strong>: oggi valida i campi ma non spedisce. Va collegato a un indirizzo email o a un servizio di invio.</p></div>
+      <div class="voce"><span class="b apr">!</span><p><strong>Orari e ricevimento</strong>: da confermare per pubblicarli accanto a telefono ed email.</p></div>
+      <div class="voce"><span class="b apr">!</span><p><strong>Privacy e cookie</strong>: le pagine ci sono; vanno completate con i dati legali dell'azienda.</p></div>
+    </div>
+  </div>
+
+  <div class="piede"><span>Qualita tecnica e prossimi passi</span><span>4 / 4</span></div>
+</section>
+
+</body>
+</html>
